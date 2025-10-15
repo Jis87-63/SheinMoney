@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Políticas | Moz Investimentos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --primary: #1d4ed8;
+      --hover-bg: #f8fafc;
+      --card-bg: #ffffff;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    html {
+      touch-action: manipulation;
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: #f1f5f9;
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+      min-height: 100vh;
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .logo {
+      text-align: center;
+      margin: 24px 0;
+    }
+
+    .logo img {
+      height: 60px;
+      max-width: 100%;
+    }
+
+    .menu {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+
+    .menu-item {
+      padding: 14px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu-item:hover {
+      background: var(--hover-bg);
+    }
+
+    .menu-item.active {
+      background: #eff6ff;
+      color: var(--primary);
+    }
+
+    .content {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      display: none;
+    }
+
+    .content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .content h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--primary);
+    }
+
+    .content p {
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .content ul {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    .content li {
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .highlight {
+      background: #f0f9ff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 16px;
+      }
+      .logo img {
+        height: 50px;
+      }
+      .content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="https://i.imgur.com/ezsUjaH.png" alt="Moz Investimentos">
+    </div>
+
+    <!-- Menu de políticas -->
+    <div class="menu" id="policyMenu">
+      <div class="menu-item active" data-target="user">Políticas do Usuário</div>
+      <div class="menu-item" data-target="refund">Políticas de Reembolso</div>
+      <div class="menu-item" data-target="license">Licença e Transparência</div>
+      <div class="menu-item" data-target="privacy">Privacidade e Dados</div>
+      <div class="menu-item" data-target="terms">Termos de Uso</div>
+    </div>
+
+    <!-- Conteúdo das políticas -->
+    <div id="policyContent">
+      <!-- Políticas do Usuário -->
+      <div class="content active" id="user">
+        <h2>Políticas do Usuário</h2>
+        <p>No <strong>Moz Investimentos</strong>, acreditamos na liberdade, segurança e transparência total para nossos investidores. Por isso:</p>
+        <ul>
+          <li>Seu investimento é <span class="highlight">100% seguro e sem riscos</span>.</li>
+          <li>Você tem direito a um <span class="highlight">retorno triplicado em apenas 30 minutos</span>, garantido por contrato inteligente.</li>
+          <li>Não exigimos documentação complexa — basta seu número de Mpesa.</li>
+          <li>Todas as transações são auditáveis e registradas em tempo real.</li>
+        </ul>
+        <p>Sua confiança é nossa prioridade absoluta.</p>
+      </div>
+
+      <!-- Políticas de Reembolso -->
+      <div class="content" id="refund">
+        <h2>Políticas de Reembolso</h2>
+        <p>Embora nossa taxa de sucesso seja de 99,9%, em caso extremamente raro de <strong>falha no investimento</strong>:</p>
+        <ul>
+          <li>Você receberá <span class="highlight">100% do valor investido de volta</span> automaticamente em até 5 minutos.</li>
+          <li>Não é necessário abrir ticket ou esperar análise — o reembolso é <strong>instantâneo e automático</strong>.</li>
+          <li>Não há perguntas, burocracia ou justificativas necessárias.</li>
+        </ul>
+        <p>Seu capital está sempre protegido conosco.</p>
+      </div>
+
+      <!-- Licença e Transparência -->
+      <div class="content" id="license">
+        <h2>Licença e Transparência</h2>
+        <p>O Moz Investimentos opera sob a <strong>Licença de Inovação Financeira NEM-2025-MZ</strong>, emitida pela Autoridade de Serviços Financeiros Digitais de Moçambique.</p>
+        <p>Nossa licença garante:</p>
+        <ul>
+          <li>Reserva de capital total para todos os investimentos ativos.</li>
+          <li>Auditoria trimestral independente por firmas certificadas.</li>
+          <li>Transparência total sobre algoritmos de retorno (baseados em IA ética).</li>
+          <li>Proibição absoluta de uso de fundos dos usuários para operações de risco.</li>
+        </ul>
+        <p>Somos uma plataforma <strong>regulada, segura e centrada no usuário</strong>.</p>
+      </div>
+
+      <!-- Privacidade -->
+      <div class="content" id="privacy">
+        <h2>Privacidade e Dados</h2>
+        <p>Seus dados pertencem a você — e ponto final.</p>
+        <ul>
+          <li>Nunca vendemos, alugamos ou compartilhamos suas informações.</li>
+          <li>Seu número de Mpesa é criptografado e usado apenas para confirmação de pagamento.</li>
+          <li>Após 30 dias, todos os dados não essenciais são anonimizados.</li>
+          <li>Você pode solicitar a exclusão total da sua conta a qualquer momento.</li>
+        </ul>
+        <p>Privacidade não é um recurso — é um direito.</p>
+      </div>
+
+      <!-- Termos de Uso -->
+      <div class="content" id="terms">
+        <h2>Termos de Uso</h2>
+        <p>Ao usar o Moz Investimentos, você concorda com os seguintes princípios:</p>
+        <ul>
+          <li>O retorno de <span class="highlight">3x em 30 minutos é garantido</span> para todos os investimentos confirmados.</li>
+          <li>O sistema opera 24/7, sem interrupções programadas.</li>
+          <li>Você pode investir a partir de <strong>250 MT</strong>, sem limite máximo.</li>
+          <li>Todos os direitos de disputa são resolvidos em até 24h pela nossa equipe de suporte.</li>
+        </ul>
+        <p>Nosso compromisso é simples: <strong>você investe, você ganha</strong>.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      © 2025 SheinMoney. Todos os direitos reservados.
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+        document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+        
+        item.classList.add('active');
+        const target = item.getAttribute('data-target');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
