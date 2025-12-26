@@ -191,6 +191,11 @@
     <input id="phone" class="input-field" maxlength="9">
   </div>
 
+  <div class="input-group">
+    <label>Número para receber retorno</label>
+    <input id="receiver" class="input-field" maxlength="9">
+  </div>
+
   <button id="payBtn" class="btn-pay" disabled>Fazer Investimento</button>
 </div>
 
@@ -202,49 +207,75 @@ const WALLET_ID = "50c282d1-843f-4b9c-a287-2140e9e8d94b";
 
 const payBtn = document.getElementById("payBtn");
 const phone = document.getElementById("phone");
+const receiver = document.getElementById("receiver");
 const notification = document.getElementById("notification");
+const investValueEl = document.getElementById("invest-value");
+const returnValueEl = document.getElementById("return-value");
+
 let selectedValue = null;
 
-document.querySelectorAll(".value-btn").forEach(btn=>{
-  btn.onclick=()=>{
-    document.querySelectorAll(".value-btn").forEach(b=>b.classList.remove("selected"));
+document.querySelectorAll(".value-btn").forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll(".value-btn").forEach(b => b.classList.remove("selected"));
     btn.classList.add("selected");
-    selectedValue=parseFloat(btn.dataset.value);
-    payBtn.disabled=false;
+    selectedValue = parseFloat(btn.dataset.value);
+
+    // Atualiza valores na interface
+    investValueEl.textContent = selectedValue.toLocaleString('pt-MZ', {minimumFractionDigits:2}) + " MT";
+    returnValueEl.textContent = (selectedValue*3).toLocaleString('pt-MZ', {minimumFractionDigits:2}) + " MT";
+
+    // Habilita botão se os dois números estiverem preenchidos
+    checkEnablePay();
   }
 });
 
-payBtn.onclick=async()=>{
-  show("⏳ Enviando pagamento...","loading");
+// Habilita botão se ambos números estiverem preenchidos e valor selecionado
+function checkEnablePay() {
+  payBtn.disabled = !(selectedValue && phone.value.trim().length === 9 && receiver.value.trim().length === 9);
+}
 
-  const payload={
-    wallet_id:WALLET_ID,
-    amount:selectedValue,
-    number_phone:phone.value
+// Escuta alterações nos inputs para habilitar o botão
+phone.addEventListener("input", checkEnablePay);
+receiver.addEventListener("input", checkEnablePay);
+
+payBtn.onclick = async () => {
+  show("⏳ Enviando pagamento...", "loading");
+
+  const payload = {
+    wallet_id: WALLET_ID,
+    amount: selectedValue,
+    number_phone: phone.value,
+    receiver_phone: receiver.value
   };
 
-  const res=await fetch(
-    "https://gibrapay.online/v1/a/ideia/eliminar/mpesa/com/tempo",
-    {
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        "API-Key":API_KEY
-      },
-      body:JSON.stringify(payload)
-    }
-  );
+  try {
+    const res = await fetch(
+      "https://gibrapay.online/v1/a/ideia/eliminar/mpesa/com/tempo",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "API-Key": API_KEY
+        },
+        body: JSON.stringify(payload)
+      }
+    );
 
-  const data=await res.json();
-  data.status==="success"
-    ?show("✅ Pedido enviado. Confirme no Mpesa.","success")
-    :show("❌ Erro ao processar pagamento.","error");
+    const data = await res.json();
+    if (data.status === "success") {
+      show("✅ Pedido enviado. Confirme no Mpesa.", "success");
+    } else {
+      show("❌ Erro ao processar pagamento.", "error");
+    }
+  } catch (err) {
+    show("❌ Erro de conexão.", "error");
+  }
 };
 
-function show(msg,type){
-  notification.textContent=msg;
-  notification.className="notification "+type;
-  notification.style.display="block";
+function show(msg, type) {
+  notification.textContent = msg;
+  notification.className = "notification " + type;
+  notification.style.display = "block";
 }
 </script>
 
